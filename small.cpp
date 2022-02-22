@@ -194,11 +194,19 @@ void readUniq(ifstream & fin,vector<mI> & cm, map<int,vector<qord> > & umRef,vec
 void readfasta(ifstream & fin,map<string, string> & fastaseq) //reading fasta files
 {
 	string str,index;
+	size_t pos;
+
 	while(getline(fin,str))
 	{
 		if(str[0] == '>')
 		{
-			index = str.substr(1);
+			// Getting the substring from the start until the first whitespace
+			if((pos = str.find_first_of(" \t")) != string::npos) {
+				index = str.substr(1, pos - 1);
+			}
+			else {
+				index = str.substr(1);
+			}
 		}
 		if(str[0] != '>')
 		{
