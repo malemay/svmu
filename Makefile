@@ -1,7 +1,7 @@
 #to compile the executable for svmu, the variant caller
 
 CC = g++
-CFLAGS = -g -Wall -std=c++0x 
+CFLAGS = -O2 -Wall -std=c++0x
 
 default: svmu
 svmu: svlib.o ansv.o small.o svmu.o
