@@ -16,6 +16,12 @@
 
 using namespace std;
 
+// We declare external variables that can get the index of a sequence entry in the query sequence
+// and the other way around, a sequence given an index. This is to allow storing query sequence
+// names as a short int in a qord object to spare memory
+extern vector<string> qseq_names;
+extern map<string, short int> qseq_map;
+
 //to store coordinates at alignment level
 struct mI {
 	string rn;
@@ -38,7 +44,7 @@ struct mI {
         };
 //to store coordinates at base pair level
 struct qord {
-	string name;
+	short int name;
 	int cord;
 	bool operator < (const qord& q1) const
 	{

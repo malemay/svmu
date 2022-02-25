@@ -7,6 +7,11 @@ using namespace std;
 using chroms = map<string,chromPair>;
 using ccov = vector<short int>;
 using vq = vector<qord>;
+
+// Defining the external variables
+vector<string> qseq_names;
+map<string, short int> qseq_map;
+
 int main(int argc, char *argv[])
 {
 	if(argc <2)
@@ -67,12 +72,20 @@ int main(int argc, char *argv[])
 	}
 
 	// Reserving sufficient capacity for masterQ and masterHQ and initializing coverage to 0
+	// We also generate the string vector with the names of query sequences
 	for(map<string, string>::iterator it = qseq.begin(); it != qseq.end(); it++) {
 		masterQ[it->first].reserve(it->second.length());
 		masterQ[it->first].resize(it->second.length(), 0);
 
 		masterHQ[it->first].reserve(it->second.length());
 		masterHQ[it->first].resize(it->second.length(), 0);
+
+		qseq_names.push_back(it->first);
+	}
+
+	// We also fill the map that allows getting a sequence index from its name
+	for(short int i = 0; i < qseq_names.size(); i++) {
+		qseq_map[qseq_names[i]] = i;
 	}
 
 	fcords.open("cords.txt");

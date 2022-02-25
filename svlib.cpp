@@ -50,7 +50,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 		{
 			if((find(mi.mv.begin(),mi.mv.end(),refC) == mi.mv.end()) && (find(mi.mv.begin(),mi.mv.end(),ci) == mi.mv.end())) //if this position does not have a indel
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC;
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -58,7 +58,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 				ci = refC * (-1);
 				if(find(mi.mv.begin(),mi.mv.end(),ci) != mi.mv.end())//if the next is a del
 				{
-					temp.name = mi.qn;
+					temp.name = qseq_map[mi.qn];
 					temp.cord = qC;
 					mRef[refC-1].push_back(temp);
 				}
@@ -66,7 +66,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 			}
 			if((find(mi.mv.begin(),mi.mv.end(),refC) != mi.mv.end())) //position has insertion
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC-1;//because when insertion begins, query cord does not increase
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -101,7 +101,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 		{
 			if((find(mi.mv.begin(),mi.mv.end(),refC) == mi.mv.end()) && (find(mi.mv.begin(),mi.mv.end(),ci) == mi.mv.end())) //if this position does not have a indel
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC;	
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -109,7 +109,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 				ci = refC * (-1);
 				if(find(mi.mv.begin(),mi.mv.end(),ci) != mi.mv.end())
 				{
-					temp.name = mi.qn;
+					temp.name = qseq_map[mi.qn];
 					temp.cord = qC;
 					mRef[refC-1].push_back(temp);
 				}
@@ -117,7 +117,7 @@ void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 			}
 			if((find(mi.mv.begin(),mi.mv.end(),refC) != mi.mv.end())) //position has insertion
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC+1;
 				mRef[refC-1].push_back(temp);				
 				refC++;
@@ -489,7 +489,7 @@ vector<mI> findQuery(vector<vq> & mRef, mI & mi,ccov & masterRef, ccov & masterQ
 		mums[j].x2 = mi.x2;
 		mums[j].y1 = mRef[mi.x1-1][j].cord;	
 		mums[j].y2 = mRef[mi.x2-1][j].cord;
-		mums[j].qn = mRef[mi.x1-1][j].name;
+		mums[j].qn = qseq_names[mRef[mi.x1-1][j].name];
 		mums[j].rn = mi.rn;
 //cout<<mums[j].rn<<"\t"<<mums[j].x1<<"\t"<<mums[j].x2<<"\t"<<mums[j].qn<<"\t"<<mums[j].y1<<"\t"<<mums[j].y2<<endl;
 		if(j ==0)

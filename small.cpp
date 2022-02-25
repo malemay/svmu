@@ -16,7 +16,7 @@ void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 		{
 			if((find(mi.mv.begin(),mi.mv.end(),refC) == mi.mv.end()) && (find(mi.mv.begin(),mi.mv.end(),ci) == mi.mv.end()))//if this position does not have a indel
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC;
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -24,14 +24,14 @@ void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 				ci = refC * (-1);
 				if(find(mi.mv.begin(),mi.mv.end(),ci) != mi.mv.end())//if the next is a del
 				{
-					temp.name = mi.qn;
+					temp.name = qseq_map[mi.qn];
 					temp.cord = qC;
 					mRef[refC-1].push_back(temp);
 				}
 			}
 			if(find(mi.mv.begin(),mi.mv.end(),refC) != mi.mv.end()) //insertion in reference
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC-1; //because when insertion begins, query cord does not increase
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -65,7 +65,7 @@ void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 		{
 			if((find(mi.mv.begin(),mi.mv.end(),refC) == mi.mv.end()) && (find(mi.mv.begin(),mi.mv.end(),ci) == mi.mv.end())) //if this position does not have a indel
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC;
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -73,14 +73,14 @@ void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 				ci = refC * (-1);
 				if(find(mi.mv.begin(),mi.mv.end(),ci) != mi.mv.end())
 				{
-					temp.name = mi.qn;
+					temp.name = qseq_map[mi.qn];
 					temp.cord = qC;
 					mRef[refC-1].push_back(temp);
 				}
 			}
 			if(find(mi.mv.begin(),mi.mv.end(),refC) != mi.mv.end())  //position has insertion
 			{
-				temp.name = mi.qn;
+				temp.name = qseq_map[mi.qn];
 				temp.cord = qC+1;
 				mRef[refC-1].push_back(temp);
 				refC++;
@@ -242,7 +242,7 @@ void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & 
 			{
 				if(tq.size()>0)
 				{
-					fsmall<<refName<<"\t"<<ti[0]<<"\t"<<ti[ti.size()-1]<<"\tDEL\t"<<tq[0].name<<"\t"<<tq[0].cord<<"\t"<<tq[tq.size()-1].cord<<"\ts"<<setfill('0')<<setw(10)<<ti[0]<<refName<<"\t"<<abs(ti[0] - ti[ti.size()-1])+1<<"\t"<<"NA"<<"\t"<<"NA"<<endl;
+					fsmall<<refName<<"\t"<<ti[0]<<"\t"<<ti[ti.size()-1]<<"\tDEL\t"<<qseq_names[tq[0].name]<<"\t"<<tq[0].cord<<"\t"<<tq[tq.size()-1].cord<<"\ts"<<setfill('0')<<setw(10)<<ti[0]<<refName<<"\t"<<abs(ti[0] - ti[ti.size()-1])+1<<"\t"<<"NA"<<"\t"<<"NA"<<endl;
 					tq.clear();
 					ti.clear();
 				}
@@ -256,7 +256,7 @@ void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & 
 				}
 				if((int(refseq[pos])-int(qseq[umRef[pos][0].cord -1]) != 0) && (abs(int(refseq[pos])-int(qseq[umRef[pos][0].cord -1])) != 32))
 				{
-					fsmall<<refName<<"\t"<<pos+1<<"\t"<<refseq[pos]<<"\tSNP\t"<<umRef[pos][0].name<<"\t"<<umRef[pos][0].cord<<"\t"<<qseq[umRef[pos][0].cord -1]<<endl;
+					fsmall<<refName<<"\t"<<pos+1<<"\t"<<refseq[pos]<<"\tSNP\t"<<qseq_names[umRef[pos][0].name]<<"\t"<<umRef[pos][0].cord<<"\t"<<qseq[umRef[pos][0].cord -1]<<endl;
 				}
 			}
 			if((refGap == 1) && (qGap ==0))
@@ -269,12 +269,12 @@ void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & 
 				//fout<<"INS "<<refName<<" "<<refPos+1<<" "<<refPos+1<<" "<<umRef[pos][0].name<<" "<<lq.cord+1<<" "<<umRef[pos][0].cord-1<<" "<<endl;
 				if(mi.y1 < mi.y2) //if forward oriented
 				{
-					fsmall<<refName<<" "<<refPos+1<<"\t"<<refPos+1<<"\tINS\t"<<umRef[pos][0].name<<"\t"<<lq.cord+1<<"\t"<<umRef[pos][0].cord-1<<"\ts"<<setfill('0')<<setw(10)<<refPos+1<<refName<<"\t"<<abs(lq.cord+1-umRef[pos][0].cord+1)+1<<"\t"<<"NA\tNA"<<endl;
+					fsmall<<refName<<" "<<refPos+1<<"\t"<<refPos+1<<"\tINS\t"<<qseq_names[umRef[pos][0].name]<<"\t"<<lq.cord+1<<"\t"<<umRef[pos][0].cord-1<<"\ts"<<setfill('0')<<setw(10)<<refPos+1<<refName<<"\t"<<abs(lq.cord+1-umRef[pos][0].cord+1)+1<<"\t"<<"NA\tNA"<<endl;
 				}
 				if(mi.y1 > mi.y2)
 				{
 				//	cout<<"INS\t"<<refName<<"\t"<<refPos+1<<" "<<refPos+1<<"\t"<<umRef[pos][0].name<<"\t"<<lq.cord-1<<"\t"<<umRef[pos][0].cord +1<<"\t"<<endl;
-					fsmall<<refName<<"\t"<<refPos+1<<" "<<refPos+1<<"\tINS\t"<<umRef[pos][0].name<<"\t"<<lq.cord-1<<"\t"<<umRef[pos][0].cord +1<<"\ts"<<setfill('0')<<setw(10)<<refPos+1<<refName<<"\t"<<abs(lq.cord-1- umRef[pos][0].cord-1)+1<<"\t"<<"NA\tNA"<<endl;
+					fsmall<<refName<<"\t"<<refPos+1<<" "<<refPos+1<<"\tINS\t"<<qseq_names[umRef[pos][0].name]<<"\t"<<lq.cord-1<<"\t"<<umRef[pos][0].cord +1<<"\ts"<<setfill('0')<<setw(10)<<refPos+1<<refName<<"\t"<<abs(lq.cord-1- umRef[pos][0].cord-1)+1<<"\t"<<"NA\tNA"<<endl;
 				}
 				if(abs((lq.cord+1) - (umRef[pos][0].cord-1)) > 100)
 				{
@@ -283,7 +283,7 @@ void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & 
 					tempmi.y1 = lq.cord+1;
 					tempmi.y2 = umRef[pos][0].cord -1;
 					tempmi.rn = refName;
-					tempmi.qn = umRef[pos][0].name;
+					tempmi.qn = qseq_names[umRef[pos][0].name];
 				//	gap.push_back(tempmi);
 //cout<<tempmi.rn<<" "<<tempmi.x1<<" "<<tempmi.x2<<" "<<tempmi.qn<<" "<<tempmi.y1<<" "<<tempmi.y2<<endl;
 				}
@@ -298,7 +298,7 @@ void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & 
 				}
 				if((int(refseq[pos])-int(qseq[umRef[pos][0].cord -1]) != 0) && (abs(int(refseq[pos])-int(qseq[umRef[pos][0].cord -1])) != 32))
 				{
-					fsmall<<refName<<"\t"<<pos+1<<"\t"<<refseq[pos]<<"\tSNP\t"<<umRef[pos][0].name<<"\t"<<umRef[pos][0].cord<<"\t"<<qseq[umRef[pos][0].cord -1]<<endl;
+					fsmall<<refName<<"\t"<<pos+1<<"\t"<<refseq[pos]<<"\tSNP\t"<<qseq_names[umRef[pos][0].name]<<"\t"<<umRef[pos][0].cord<<"\t"<<qseq[umRef[pos][0].cord -1]<<endl;
 				}				
 			}
 			lq = umRef[pos][0];
