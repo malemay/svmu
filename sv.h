@@ -60,7 +60,6 @@ class chromPair {
 };
 
 bool qusort(mI mi1, mI mi2); //to sort the mI based on query coordinates
-vector<int> makeChromBucket(int refLen);
 void storeCords(vector<int> & masterRef,vector<int> & masterQ, mI & mi);
 void storeCords(vector<int> & masterQ, mI & mi);//overloaded
 void storeCords(vector<vector<qord> > & mRef, mI & mi, ofstream & fout); //overloaded

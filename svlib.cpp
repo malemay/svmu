@@ -10,15 +10,6 @@ bool qusort(mI mi1, mI mi2)
 {
 	return (min(mi1.y1,mi1.y2) < min(mi2.y1,mi2.y2)) ||((min(mi1.y1,mi1.y2) == min(mi2.y1,mi2.y2)) && (max(mi1.y1,mi1.y2)<max(mi2.y1,mi2.y2)));
 }
-ccov makeChromBucket(int refLen)
-{
-	ccov v;
-	for(int i=0;i<refLen;i++)
-	{
-		v.push_back(0);
-	}
-return v;
-}	
 ///////////////////////////////////////////////////////////
 void storeCords(ccov & masterRef,ccov & masterQ, mI & mi)
 {

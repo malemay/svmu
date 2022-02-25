@@ -54,11 +54,25 @@ int main(int argc, char *argv[])
 	qFasta.close();
 
 	// Reserving sufficient capacity for mRef and umRef to store the sequences
+	// As well as for masterRef to store coverage
 	for(map<string, string>::iterator it = refseq.begin(); it != refseq.end(); it++) {
-		mRef[it->first].reserve((it->second).length() + 1);
-		mRef[it->first].resize((it->second).length() + 1);
-		umRef[it->first].reserve((it->second).length() + 1);
-		umRef[it->first].resize((it->second).length() + 1);
+		mRef[it->first].reserve(it->second.length() + 1);
+		mRef[it->first].resize(it->second.length() + 1);
+
+		umRef[it->first].reserve(it->second.length() + 1);
+		umRef[it->first].resize(it->second.length() + 1);
+
+		masterRef[it->first].reserve(it->second.length());
+		masterRef[it->first].resize(it->second.length(), 0);
+	}
+
+	// Reserving sufficient capacity for masterQ and masterHQ and initializing coverage to 0
+	for(map<string, string>::iterator it = qseq.begin(); it != qseq.end(); it++) {
+		masterQ[it->first].reserve(it->second.length());
+		masterQ[it->first].resize(it->second.length(), 0);
+
+		masterHQ[it->first].reserve(it->second.length());
+		masterHQ[it->first].resize(it->second.length(), 0);
 	}
 
 	fcords.open("cords.txt");
@@ -82,14 +96,6 @@ int main(int argc, char *argv[])
 			seqLen[indexAln].push_back(refLen);
 			seqLen[indexAln].push_back(qLen);
 			cp[refName].push_back(indexAln); //adding the alignment to the list of refName alignments
-			if(masterRef[refName].size() == 0)//if they have not been created
-			{
-				masterRef[refName] = makeChromBucket(refLen);
-			}
-			if(masterQ[qName].size() == 0)//if they have not been created
-			{
-				masterQ[qName] = makeChromBucket(qLen);
-			}
 		}
 		if((line.size() <10) && (refName != "") && (count > -1))
 		{

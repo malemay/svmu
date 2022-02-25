@@ -113,7 +113,7 @@ void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vect
 {
 	string refName,qName,indexAln,line;
 	size_t pos1,pos2,namePos;
-	int Len=0, count =0,indelPos =0, refStart =0, qStart =0, refEnd =0, qEnd = 0;
+	int count =0,indelPos =0, refStart =0, qStart =0, refEnd =0, qEnd = 0;
 	vector<int> vi;
 	
 	mI tempmi;
@@ -127,14 +127,9 @@ void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vect
 			pos2 = line.find(' ',pos1+1);//position of the second space
 			qName = line.substr(pos1+1, pos2-pos1-1); //up to the second space
 			pos1 = line.find(' ',pos2+1); //recycling pos1 to find pos3
-			Len = stoi(line.substr(pos2+1,pos1-pos2));//reference length
-			Len = stoi(line.substr(pos1));//from last space till end. This is qLen
 			indexAln = refName + qName;
 			count = -1;
-			if((masterHQ.size() == 0) && (qName == cm[0].qn))//if they have not been created
-			{
-				masterHQ = makeChromBucket(Len);//Here Len is qLen
-			}
+
 		}
 		if((line.size() <10) && (refName != "") && (count > -1))
 		{
