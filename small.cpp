@@ -109,7 +109,7 @@ void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 	}
 }
 //////////////////////////////////////////////////////////
-void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vector<int> & masterHQ) //records one to one mapping
+void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vector<short int> & masterHQ) //records one to one mapping
 {
 	string refName,qName,indexAln,line;
 	size_t pos1,pos2,namePos;
@@ -360,7 +360,7 @@ char comp(char & N) //return the complementary nucleotide
 return c;
 }		
 //////////////////////////////////////////////////////////////////////
-void storeCords(vector<int> & masterHQ, mI & mi)
+void storeCords(vector<short int> & masterHQ, mI & mi)
 {
 
         int ty1 = 0, ty2 =0;

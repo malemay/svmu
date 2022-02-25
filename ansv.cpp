@@ -3,7 +3,7 @@
 
 using namespace std;
 using chroms = map<string,chromPair>;
-using ccov = vector<int>;
+using ccov = vector<short int>;
 using vq = vector<qord>;
 
 void annotGaps(vector<mI> & cm, vector<vq> & mRef, ccov & masterRef, ccov & masterQ, vector<mI> & cnv, vector<vector<qord> > & umRef, string & refseq, string & qseq, vector<int> & seqLen,ofstream & fout, ofstream & fsmall, int & id)

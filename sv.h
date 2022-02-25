@@ -60,27 +60,27 @@ class chromPair {
 };
 
 bool qusort(mI mi1, mI mi2); //to sort the mI based on query coordinates
-void storeCords(vector<int> & masterRef,vector<int> & masterQ, mI & mi);
-void storeCords(vector<int> & masterQ, mI & mi);//overloaded
+void storeCords(vector<short int> & masterRef,vector<short int> & masterQ, mI & mi);
+void storeCords(vector<short int> & masterQ, mI & mi);//overloaded
 void storeCords(vector<vector<qord> > & mRef, mI & mi, ofstream & fout); //overloaded
 void storeCordsCm(vector<vector<qord>> & mRef, mI & mi);
 int findDist(int & x1, int & y1, int & c);//distance between the diagonal and the other MUMs
 bool detectShadow(mI & mum, vector<mI> & mums, unsigned int n);
-mI findClosest(mI & mi, vector<mI> & mums,unsigned int i, vector<int> & masterRef,vector<int> & masterQ);
+mI findClosest(mI & mi, vector<mI> & mums,unsigned int i, vector<short int> & masterRef,vector<short int> & masterQ);
 mI findClosest(mI & mi, vector<mI> & mums);//overloaded function
-vector<double> getCoverage(mI & mi, vector<int> & masterRef,vector<int> & masterQ);
-vector<double> getCoverage(mI & mi, vector<int> & masterRef,vector<int> & masterQ,float p);
+vector<double> getCoverage(mI & mi, vector<short int> & masterRef,vector<short int> & masterQ);
+vector<double> getCoverage(mI & mi, vector<short int> & masterRef,vector<short int> & masterQ,float p);
 //void splitByCoverage(chromPair & cp,vector<int> & chrom, vector<mI> & mums,vector<int> & masterRef, vector<int> & masterQ);
-void splitByCoverage(chromPair & cp, vector<vector<qord> > & mRef,vector<int> & rchrom,vector<int> & qchrom);
-void splitByCoverageSen(chromPair & cp, vector<vector<qord> > & mRef,vector<int> & rchrom,vector<int> & qchrom);
+void splitByCoverage(chromPair & cp, vector<vector<qord> > & mRef,vector<short int> & rchrom,vector<short int> & qchrom);
+void splitByCoverageSen(chromPair & cp, vector<vector<qord> > & mRef,vector<short int> & rchrom,vector<short int> & qchrom);
 void gapCloser(mI & mi, vector<mI> ncm, vector<mI>& cm);
 void gapCloserRev(mI & mi, vector<mI> ncm, vector<mI> & cm);
-vector<mI> findQuery(vector<vector<qord> > & mRef, mI & mi,vector<int> & masterRef, vector<int> & masterQ,vector<int> & masterHQ);
+vector<mI> findQuery(vector<vector<qord> > & mRef, mI & mi,vector<short int> & masterRef, vector<short int> & masterQ,vector<short int> & masterHQ);
 int nearestInt(double d);
-void annotGaps(vector<mI> & cm,vector<vector<qord> > & mRef,vector<int> & masterRef, vector<int> & masterQ,vector<mI> & cnv, vector<vector<qord> > & umRef, string & refseq, string & qseq,vector<int> & seqlen,ofstream & fout, ofstream & fsmall,int & id);
-void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vector<int> & masterHQ);
+void annotGaps(vector<mI> & cm,vector<vector<qord> > & mRef,vector<short int> & masterRef, vector<short int> & masterQ,vector<mI> & cnv, vector<vector<qord> > & umRef, string & refseq, string & qseq,vector<int> & seqlen,ofstream & fout, ofstream & fsmall,int & id);
+void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vector<short int> & masterHQ);
 void callSmall(mI & mi, vector<vector<qord> > & umRef, string & refseq, string & qseq,vector<int> & seqlen,ofstream & fsmall);
-void findCnvOverlap(vector<mI> & cnv,mI & mi,vector<mI> & storedCNV,vector<int> & masterRef, vector<int> & masterQ, ofstream & fout, int & id);
+void findCnvOverlap(vector<mI> & cnv,mI & mi,vector<mI> & storedCNV,vector<short int> & masterRef, vector<short int> & masterQ, ofstream & fout, int & id);
 void findCnvOverlapInRef(vector<mI> & cnv,mI & mi,vector<mI> & storedCNV,ofstream & fout);
 mI findDup(mI & mi1, mI & mi2);
 char comp(char & N);

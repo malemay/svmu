@@ -2,7 +2,7 @@
 #include "sv.h"
 using namespace std;
 using chroms = map<string,chromPair>;
-using ccov = vector<int>;
+using ccov = vector<short int>;
 using vq = vector<qord>;
 
 /////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ vector<double> getCoverage(mI & mi, ccov & masterRef, ccov & masterQ, float p)
 	int d = 0, cov = 0,covCount=0, medCov =0;
 	double c;
 	vector<double> cc;
-	map<int,int> covFreq;//holds coverage frequency for the genomic interval
+	map<short int,int> covFreq;//holds coverage frequency for the genomic interval
 //cout<<mi.x1<<"\t"<<mi.x2<<"\t"<<mi.y1<<"\t"<<mi.y2<<"\t";
 	d = mi.x2 - mi.x1;
 	for(int i = mi.x1-1;i<mi.x2;i++)
@@ -161,7 +161,7 @@ vector<double> getCoverage(mI & mi, ccov & masterRef, ccov & masterQ, float p)
 		cov = cov + masterRef[i];	
 		covFreq[masterRef[i]]++;
 	}
-	for(map<int,int>::iterator it = covFreq.begin();it!= covFreq.end();it++)
+	for(map<short int,int>::iterator it = covFreq.begin();it!= covFreq.end();it++)
 	{
 		if((covCount <int(d*p)) && (d>5))
 		{
@@ -190,7 +190,7 @@ vector<double> getCoverage(mI & mi, ccov & masterRef, ccov & masterQ, float p)
 		cov = cov + masterQ[i];
 		covFreq[masterQ[i]]++;
 	}
-	for(map<int,int>::iterator it = covFreq.begin();it!= covFreq.end();it++)
+	for(map<short int,int>::iterator it = covFreq.begin();it!= covFreq.end();it++)
 	{
 		if((covCount <int(d*p)+1) && (d>5))
 		{

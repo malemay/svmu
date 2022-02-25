@@ -5,7 +5,7 @@
 using namespace std;
 
 using chroms = map<string,chromPair>;
-using ccov = vector<int>;
+using ccov = vector<short int>;
 using vq = vector<qord>;
 int main(int argc, char *argv[])
 {
