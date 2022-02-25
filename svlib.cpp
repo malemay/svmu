@@ -46,7 +46,7 @@ void storeCords(ccov & masterRef,ccov & masterQ, mI & mi)
 	}
 }
 ///////////////////////////////////////////////////////
-void storeCords(map<int,vq> & mRef, mI & mi,ofstream & fout)
+void storeCords(vector<vq> & mRef, mI & mi,ofstream & fout)
 {	
 	int refC = mi.x1;
 	int ci = 0; //assuming that the first base in a mum will not have an insertion in query
@@ -302,7 +302,7 @@ mI findClosest(mI & mi, vector<mI> & mums)
 return it->second;
 }
 ////////////////////////////////////////////////////
-void splitByCoverageSen(chromPair & cp, map<int,vq> & mRef,ccov & chrom, ccov & masterQ)
+void splitByCoverageSen(chromPair & cp, vector<vq> & mRef,ccov & chrom, ccov & masterQ)
 {
 	int cov=0, lastcov=0, nextcov =0;
 	//vector<mI> mum;
@@ -354,7 +354,7 @@ void splitByCoverageSen(chromPair & cp, map<int,vq> & mRef,ccov & chrom, ccov & 
 		
 }
 ///////////////////////////////////////////////////
-void splitByCoverage(chromPair & cp,map<int,vq> & mRef, ccov & chrom, ccov & masterQ)
+void splitByCoverage(chromPair & cp, vector<vq> & mRef, ccov & chrom, ccov & masterQ)
 //void splitByCoverage(chromPair & cp, ccov & chrom, ccov & masterQ)
 {
 	int cov=0, lastcov=0, nextcov =0;
@@ -475,7 +475,7 @@ void gapCloserRev(mI & mi, vector<mI> ncm, vector<mI> & cm)
 	}	
 }
 /////////////////////////////////////////////////	
-vector<mI> findQuery(map<int,vq> & mRef, mI & mi,ccov & masterRef, ccov & masterQ, ccov & masterHQ)
+vector<mI> findQuery(vector<vq> & mRef, mI & mi,ccov & masterRef, ccov & masterQ, ccov & masterHQ)
 {
 	
 	//vector<mI> mums(mRef[mi.x1].size());//creating the vector of the coverage size
@@ -561,7 +561,7 @@ int nearestInt(double d)//returns the nearest integer
 	}
 }
 /////////////////////////////////////////////	
-void xtracTrans(map<int,vq> & mRef,vector<mI> & cm, ofstream & ftest)
+void xtracTrans(vector<vq> & mRef,vector<mI> & cm, ofstream & ftest)
 {
 	//vector<mI> qcm = cm;
 	int k = cm.size()-1;//to use for traversing the vector in reverse direction

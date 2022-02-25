@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
 	map<string,vector<string> > cp; //cp is an alias for Chromosome partner. Each reference name index has a vector of unqiue alignments which are part of these
 	map<string,vector<string> > hcp;//hcp stands for homologous cp
 	
-	map<string,map<int,vq> > mRef; //stores the coordinates of query on reference chromosomes
-	map<string,map<int,vq> > umRef;//stores the coordinates of unique reference to query map; requires re-reading the file
+	map<string,vector<vq> > mRef; //stores the coordinates of query on reference chromosomes
+	map<string,vector<vq> > umRef;//stores the coordinates of unique reference to query map; requires re-reading the file
 	map<string,string> refseq;
 	map<string,string> qseq;
 	map<string,vector<int> > seqLen;//length of sequences.first element is ref and second is query
@@ -44,6 +44,23 @@ int main(int argc, char *argv[])
 	ifstream fin, refFasta, qFasta;
 	ofstream fout,fcm,fcnv,fsmall,ftrans,findel,fcords;
 	fin.open(argv[1]);
+
+	refFasta.open(argv[2]);//read in the reference fasta
+	readfasta(refFasta,refseq);//load them into memory
+	refFasta.close();
+
+	qFasta.open(argv[3]);//read in the query fasta	
+	readfasta(qFasta,qseq);
+	qFasta.close();
+
+	// Reserving sufficient capacity for mRef and umRef to store the sequences
+	for(map<string, string>::iterator it = refseq.begin(); it != refseq.end(); it++) {
+		mRef[it->first].reserve((it->second).length() + 1);
+		mRef[it->first].resize((it->second).length() + 1);
+		umRef[it->first].reserve((it->second).length() + 1);
+		umRef[it->first].resize((it->second).length() + 1);
+	}
+
 	fcords.open("cords.txt");
 	fcm.open("cm.txt");
 	while(getline(fin,line))
@@ -297,12 +314,6 @@ int main(int argc, char *argv[])
 	}
 	ftrans.close();
 	
-	refFasta.open(argv[2]);//read in the reference fasta
-	readfasta(refFasta,refseq);//load them into memory
-	refFasta.close();
-	qFasta.open(argv[3]);//read in the query fasta	
-	readfasta(qFasta,qseq);
-	qFasta.close();
 	int id = 0;	
 	fout.open("sv.txt");
 	fcnv.open("cnv_all.txt");

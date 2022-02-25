@@ -2,7 +2,7 @@
 #include<iostream>
 #include "seqIO.h"
 /////////////////////////////////////////////////////////////////////////////
-void storeCordsCm(map<int,vector<qord> > & mRef, mI & mi)
+void storeCordsCm(vector<vector<qord> > & mRef, mI & mi)
 {
 	int refC = mi.x1;
 //	int ci = refC * (-1); //ci minus i
@@ -109,7 +109,7 @@ void storeCordsCm(map<int,vector<qord> > & mRef, mI & mi)
 	}
 }
 //////////////////////////////////////////////////////////
-void readUniq(ifstream & fin,vector<mI> & cm, map<int,vector<qord> > & umRef,vector<int> & masterHQ) //records one to one mapping
+void readUniq(ifstream & fin,vector<mI> & cm, vector<vector<qord> > & umRef,vector<int> & masterHQ) //records one to one mapping
 {
 	string refName,qName,indexAln,line;
 	size_t pos1,pos2,namePos;
@@ -215,7 +215,7 @@ void readfasta(ifstream & fin,map<string, string> & fastaseq) //reading fasta fi
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void callSmall(mI & mi,map<int,vector<qord> > & umRef, string & refseq, string & qseq,vector<int> & seqLen, ofstream & fsmall) //just get the individual sequences passed
+void callSmall(mI & mi,vector<vector<qord> > & umRef, string & refseq, string & qseq,vector<int> & seqLen, ofstream & fsmall) //just get the individual sequences passed
 {
 	int refPos =0,refGap =0,qGap =0;
 	refPos = mi.x1 -2;

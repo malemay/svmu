@@ -6,7 +6,7 @@ using chroms = map<string,chromPair>;
 using ccov = vector<int>;
 using vq = vector<qord>;
 
-void annotGaps(vector<mI> & cm, map<int,vq> & mRef, ccov & masterRef, ccov & masterQ, vector<mI> & cnv, map<int,vector<qord> > & umRef, string & refseq, string & qseq, vector<int> & seqLen,ofstream & fout, ofstream & fsmall, int & id)
+void annotGaps(vector<mI> & cm, vector<vq> & mRef, ccov & masterRef, ccov & masterQ, vector<mI> & cnv, vector<vector<qord> > & umRef, string & refseq, string & qseq, vector<int> & seqLen,ofstream & fout, ofstream & fsmall, int & id)
 {
 	int refOvl =0; //overlap between reference intervals
 	int qOvl = 0; //overlap between query intervals
